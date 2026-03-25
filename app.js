@@ -47,6 +47,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));//to connect with css files
 
+
 const store =MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
@@ -71,10 +72,10 @@ const sessionOptions={
     },
 };
 
+
 // app.get("/",(req,res)=>{
 //     res.send("Hi,i'm root");
 // });
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -89,9 +90,10 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
-    res.locals.currUser=req.user;
+    res.locals.currUser=req.user||null;
     next();
 });
+
 
 // app.get("/demouser",async(req,res)=>{
 //     let fakeUser = new User({
@@ -107,9 +109,11 @@ app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/",userRouter);
 
+
 // app.all("*",(req,res,next)=>{
 //     next(new ExpressError(404,"Page Not Found!"));
 // });
+
 
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong"}=err;
@@ -117,6 +121,11 @@ app.use((err,req,res,next)=>{
 
 });
 
-app.listen(8080,()=>{
-    console.log("server is listening to port 8080");
+// app.listen(8080,()=>{
+//     console.log("server is listening to port 8080");
+// });
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Server running on port:", port);
 });
