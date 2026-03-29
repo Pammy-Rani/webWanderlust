@@ -16,10 +16,17 @@ Authentication: Passport.js
 Tools: Git, GitHub, Cloudinary (image upload), Render
 
 🧩 Features
+
 🔐 User Authentication (Register/Login/Logout)
+
 🏘️ Create, Edit & Delete Listings
+
 🖼️ Image Upload via Cloudinary
+
 ⭐ Reviews & Ratings System
+
 📱 Fully Responsive UI
+
 📦 RESTful Routes
+
 ⚡ Smooth Error Handling & Validations
